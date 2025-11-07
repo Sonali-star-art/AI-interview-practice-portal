@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Interview Practice Portal</title>
+ <style>
+body {
+  font-family: 'Poppins', Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background: radial-gradient(circle at top left, rgb(12,15,36), rgb(45,60,115) 70%);
+  color: rgb(230,240,255);
+  font-size: 18px; /* Increased base text size */
+  line-height: 1.6;
+}
+
+/* ---------- Header ---------- */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 40px;
+  background: rgb(22,27,60);
+}
+
+header h1 {
+  margin: 0;
+  font-size: 2rem;
+  color: rgb(0,195,255);
+}
+
+/* ---------- Auth Buttons ---------- */
+.auth-links {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  white-space: nowrap; /* ✅ Prevents "Sign Up" from breaking into two lines */
+}
+
+.auth-links button {
+  padding: 10px 28px; /* ✅ Added more horizontal space */
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 1rem;
+  color: white;
+  transition: all 0.3s ease;
+  white-space: nowrap; /* ✅ Ensures single-line text */
+}
+
+.login-btn { background: rgb(0,195,255); }
+.signup-btn { background: rgb(125,95,255); }
+
+.login-btn:hover { background: rgb(0,155,205); transform: scale(1.05); }
+.signup-btn:hover { background: rgb(100,70,200); transform: scale(1.05); }
+
+/* ---------- Container ---------- */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 30px;
+}
+
+/* ---------- Heading & Description ---------- */
+h1 {
+  font-size: 3rem; /* Larger heading */
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+p {
+  text-align: center;
+  color: rgba(230,240,255,0.85);
+  font-size: 1.1rem;
+  margin-bottom: 35px;
+}
+
+/* ---------- Features Section ---------- */
+.features {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  margin-bottom: 50px;
+  gap: 25px;
+}
+
+.feature-box {
+  background: rgba(0,195,255,0.05);
+  padding: 25px;
+  border-radius: 20px;
+  width: 280px;
+  backdrop-filter: blur(5px);
+  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+  text-align: center;
+}
+
+.feature-box h3 {
+  margin: 0 0 12px 0;
+  font-size: 1.3rem;
+  color: rgb(0,195,255);
+}
+
+.feature-box p {
+  font-size: 1rem;
+  margin: 0;
+  color: rgba(230,240,255,0.9);
+}
+
+/* ---------- Form Section ---------- */
+.form-container {
+  display: flex;
+  flex-wrap: wrap;
+  background: rgba(22,27,60,0.95);
+  color: rgb(230,240,255);
+  padding: 40px;
+  border-radius: 25px;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.4);
+  gap: 25px;
+  align-items: center;
+}
+
+.form-left, .form-right { flex: 1 1 350px; }
+
+.form-left h2 {
+  color: rgb(0,195,255);
+  font-size: 2rem;
+  margin-bottom: 15px;
+}
+
+.form-left p {
+  font-size: 1rem;
+  margin-bottom: 20px;
+  color: rgba(230,240,255,0.8);
+}
+
+/* ---------- Inputs ---------- */
+label {
+  font-size: 1rem;
+  font-weight: 500;
+  margin-bottom: 5px;
+  display: block;
+}
+
+input, select, button {
+  display: block;
+  width: 100%;
+  padding: 12px 15px;
+  margin-bottom: 18px;
+  border-radius: 10px;
+  border: 1px solid rgb(55,70,120);
+  font-size: 1rem;
+  background: rgb(25,30,60);
+  color: rgb(230,240,255);
+  outline: none;
+  transition: all 0.3s ease;
+}
+
+input::placeholder, select::placeholder {
+  color: rgba(130,140,165,0.7);
+}
+
+input:focus, select:focus {
+  border-color: rgb(0,195,255);
+  box-shadow: 0 0 10px rgba(0,195,255,0.4);
+  background: rgb(32,37,70);
+}
+
+/* ---------- Start Button ---------- */
+button.start-btn {
+  background: linear-gradient(to right, rgb(0,195,255), rgb(125,95,255));
+  color: white;
+  font-weight: bold;
+  font-size: 1.1rem;
+  padding: 12px;
+  cursor: pointer;
+  border: none;
+  border-radius: 10px;
+  transition: all 0.3s ease;
+}
+
+button.start-btn:hover {
+  background: linear-gradient(to right, rgb(0,155,205), rgb(100,70,200));
+  transform: scale(1.05);
+}
+
+/* ---------- Images ---------- */
+img {
+  width: 100%;
+  border-radius: 15px;
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 900px) {
+  .features { flex-direction: column; align-items: center; }
+  .form-container { flex-direction: column; }
+  header {
+    flex-direction: column;
+    gap: 10px;
+    text-align: center;
+  }
+  h1 { font-size: 2.2rem; }
+  p, input, select, button { font-size: 1rem; }
+}
+</style>
+
+</head>
+<body>
+
+<header>
+  <h1>AI Interview Practice Portal</h1>
+  <div class="auth-links">
+  <button class="login-btn" onclick="window.location.href='/auth?mode=login'">Login</button>
+  <button class="signup-btn" onclick="window.location.href='/auth?mode=signup'">Sign Up</button>
+</div>
+
+</header>
+
+<div class="container">
+  <section>
+    <h1>Master Your Next Interview</h1>
+    <p>Practice with AI-powered interviews, get detailed feedback, and track your progress.</p>
+  </section>
+
+  <div class="features">
+    <div class="feature-box">
+      <h3>Voice Practice</h3>
+      <p>Practice speaking with realistic voice interactions and get feedback on delivery.</p>
+    </div>
+    <div class="feature-box">
+      <h3>AI Evaluation</h3>
+      <p>Get personalized suggestions and strengths/weaknesses.</p>
+    </div>
+    <div class="feature-box">
+      <h3>Progress Tracking</h3>
+      <p>Monitor improvements over time with a dashboard.</p>
+    </div>
+  </div>
+
+  <div class="form-container">
+    <div class="form-left">
+      <h2>Start Your Practice Interview</h2>
+      <p>Let's tailor your mock interview - choose your domain and get started!</p>
+
+      <form id="interviewForm">
+        <label for="domain">Domain:</label>
+        <select id="domain">
+          <option value="Software Development">Software Development</option>
+          <option value="DevOps">DevOps</option>
+          <option value="Data Science">Data Science</option>
+        </select>
+
+        <label for="specialization">Specialization:</label>
+        <select id="specialization"></select>
+
+        <label for="skills">Key Skills (comma separated):</label>
+        <input type="text" id="skills" placeholder="e.g. React, Node.js">
+
+        <label for="experience">Years of Experience:</label>
+        <input type="number" id="experience" min="0" placeholder="0">
+
+        <label for="count">Number of Questions:</label>
+        <select id="count">
+          <option value="3">3 Questions (Quick)</option>
+          <option value="5" selected>5 Questions (Standard)</option>
+          <option value="8">8 Questions (Comprehensive)</option>
+          <option value="10">10 Questions (Full)</option>
+        </select>
+
+        <button type="button" class="start-btn" onclick="startInterview()">Start Interview</button>
+      </form>
+    </div>
+    <div class="form-right">
+      <img src="AI Interview Practice Portal Illustration.png" alt="Interview Wallpaper">
+    </div>
+  </div>
+</div>
+
+<script>
+  // Dynamic specializations
+  const specializations = {
+    'Software Development': ['Frontend', 'Backend', 'Full Stack', 'MERN Stack', 'Mobile Development'],
+    'DevOps': ['AWS DevOps', 'Azure DevOps', 'Kubernetes', 'CI/CD Pipelines', 'Infrastructure as Code (IaC)'],
+    'Data Science': ['Machine Learning', 'Data Analysis', 'Data Engineering', 'Big Data', 'Business Intelligence'],
+  };
+
+  const domainSelect = document.getElementById('domain');
+  const specializationSelect = document.getElementById('specialization');
+
+  function updateSpecializations() {
+    const domain = domainSelect.value;
+    specializationSelect.innerHTML = '';
+    (specializations[domain] || []).forEach(spec => {
+      const option = document.createElement('option');
+      option.value = spec;
+      option.text = spec;
+      specializationSelect.appendChild(option);
+    });
+  }
+
+  domainSelect.addEventListener('change', updateSpecializations);
+  window.onload = updateSpecializations;
+
+  function startInterview() {
+    // Check if user is logged in
+    const isLoggedIn = sessionStorage.getItem('loggedIn');
+    if (!isLoggedIn) {
+      alert("Please login or signup first!");
+      window.location.href = 'login.html'; // Redirect to login
+      return;
+    }
+
+    const domain = domainSelect.value;
+    const specialization = specializationSelect.value;
+    const skills = document.getElementById('skills').value.split(',').map(s => s.trim()).filter(Boolean);
+    const experience = document.getElementById('experience').value;
+    const count = document.getElementById('count').value;
+
+    sessionStorage.setItem('ai_domain', domain);
+    sessionStorage.setItem('ai_specialization', specialization);
+    sessionStorage.setItem('ai_skills', JSON.stringify(skills));
+    sessionStorage.setItem('ai_experience', experience);
+    sessionStorage.setItem('ai_count', count);
+
+    // Redirect to dashboard or interview page
+    window.location.href = 'dashboard.html';
+  }
+</script>
+
+</body>
+</html>
